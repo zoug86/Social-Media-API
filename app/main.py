@@ -54,7 +54,7 @@ def create_posts(post: Post):
     return {"data": post_dict}
 
 
-@app.put("/posts/{id}")
+@app.put("/posts/{id}", status_code=status.HTTP_201_CREATED)
 def delete_post(id: int, new_post: Post):
     post = find_post(id)
     if not post:
