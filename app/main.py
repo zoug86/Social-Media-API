@@ -3,14 +3,15 @@ from fastapi import FastAPI
 # from psycopg2.extras import RealDictCursor
 from . import models
 from .database import engine
-from .routers import post, user
+from .routers import post, user, auth
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(post.router, prefix="/posts", tags=["post"])
-app.include_router(user.router, prefix="/users", tags=["user"])
+app.include_router(post.router, tags=["Posts"])
+app.include_router(user.router, tags=["Users"])
+app.include_router(auth.router,  tags=["Authentication"])
 
 
 @app.get("/")
